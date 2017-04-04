@@ -1,0 +1,147 @@
+# --------------------------------------------------
+
+- 安裝內建範例所需要的套件
+- 在本機執行測試
+    Windows: > cd "%GOPATH%\src\golang.org\x\mobile\example\basic"
+    MacBook: $ cd "$GOPATH/src/golang.org/x/mobile/example/basic"
+    MacBook: $ cd "$GOPATH/src/golang.org/x/mobile/example/flappy/"
+    $> go run main.go
+> gomobile build --target=android -o="%GOPATH%\src\golang.org\x\mobile\example\flappy\flappy.apk" golang.org/x/mobile/example/flappy
+
+gomobile build -target ios ./
+gomobile build --target=ios ./
+gomobile build --target=android ./
+# https://github.com/golang/go/issues/12660
+$ cp -p -r "$GOPATH/src/golang.org/x/mobile/cmd/gomobile/build_iosapp.go" "$GOPATH/src/golang.org/x/mobile/cmd/gomobile/build_iosapp.go.bak"
+$ vim "$GOPATH/src/golang.org/x/mobile/cmd/gomobile/build_iosapp.go"
+
+$ go install golang.org/x/mobile/cmd/gomobile
+Change BundleID's value from org.golang.todo. to domain.your_organization.package.
+
+
+$ gomobile build -target=ios -o="$GOPATH/src/golang.org/x/mobile/example/flappy/flappy.app" golang.org/x/mobile/example/flappy
+
+#$ chmod -R 775 "/Users/cookie/work/pkg/gomobile/"
+#$ gomobile init -v --ndk "/users/cookie/Library/Android/ndk"
+#$ gomobile build --target=android -o="$GOPATH/src/golang.org/x/mobile/example/flappy/flappy.apk" golang.org/x/mobile/example/flappy
+
+bash-3.2$ gomobile init -v -ndk "/users/cookie/Library/Android/ndk"
+gomobile: go install -gcflags=-shared -ldflags=-shared -pkgdir=/Users/cooki
+e/work/pkg/gomobile/pkg_android_arm64 std failed: exit status 2
+
+# runtime/cgo
+fork/exec /users/cookie/Library/Android/ndk/toolchains/llvm/prebuilt/darwin
+-x86_64/bin/clang: no such file or directory
+
+
+
+
+
+
+大大們新年快樂 ~ ^^
+想請問各位大大，敬翔過年這三天試玩 gomobile（因 2/14 受線上讀書會大家長邀請，想透過此機會推廣 golang 語言），結果使用 Mac 時卡關了…
+--------------------------------------------------
+1、我在使用 Windows 10 執行下面指令可以順利建立 basic.apk，並可在 Android 手機上執行：
+> go get -u -v golang.org/x/mobile/cmd/gomobile
+> gomobile init -v
+> cd "%GOPATH%\src\golang.org\x\mobile\example\basic"
+> gomobile build --target=android .\
+--------------------------------------------------
+2、但敬翔在使用 Mac 時卻出現錯誤訊息，而無法建立 basic.apk：
+$ cd "$GOPATH/src/golang.org/x/mobile/example/basic"
+$ gomobile build --target=android ./
+gomobile: no Android NDK path is set. Please run gomobile init with the ndk-bundle installed through the Android SDK manager or with the -ndk flag set.
+--------------------------------------------------
+3、目前已確定 Mac 上已設定好 $PATH 環境變數，且可執行 javac 及 ndk-build 等指令
+（1）$JAVA_HOME/bin
+（2）$ANDROID_SDK_HOME/build-tools
+（3）$ANDROID_SDK_HOME/platform-tools
+（4）$ANDROID_SDK_HOME/tools
+（5）$ANDROID_NDK_HOME
+--------------------------------------------------
+4、另外我也有在 Mac 上執行下面指令，也出現錯誤（如下圖）
+$ gomobile build --target=ios ./
+--------------------------------------------------
+因為敬翔初次使用 Mac 不到三週，不知有哪裡設定錯的地方
+懇請大大們解惑，感激不盡！
+
+最後敬祝新年快樂 事事順利 順心！
+
+
+# --------------------------------------------------
+
+我可以直接跑 `gomobile build --target=android ` 在 cd "%GOPATH%\src\golang.org\x\mobile\example\basic" 下
+
+可以正常 build basic.apk
+
+你可能要確認幾件事情...
+1. gomobile init 有加上 -ndk with ndk path (refer https://github.com/....../master/cmd/gomobile/init.go......)
+2. 你的 Go 版本
+3. 你的 Gomobile 是否有 compiler 你的最新版
+4. 確認你 gomobile init 是在你已經裝好 NDK 之後
+
+# --------------------------------------------------
+
+Evan 大好：
+
+感謝，這個問題經過您的提醒後來可以順利編譯 basic.apk 檔了！
+我做了以下事情：
+# --------------------------------------------------
+1、重新安裝 Golang（1.7.5）
+# --------------------------------------------------
+2、將 $GOPATH/src/golang.org/x/mobile 刪除
+# --------------------------------------------------
+3、執行指令
+$ go clean
+$ go get -u -v golang.org/x/mobile/cmd/gomobile
+註：若不執行 go clean 就直接執行 go get 的話會出現下述錯誤，原因尚需調查：
+package golang.org/x/mobile/cmd/gomobile: cannot find package "golang.org/x/mobile/cmd/gomobile" in any of:
+	/usr/local/go/src/golang.org/x/mobile/cmd/gomobile (from $GOROOT)
+	/Users/cookie/work/src/golang.org/x/mobile/cmd/gomobile (from $GOPATH)
+# --------------------------------------------------
+4、至下列網站下載最新穩定版 NDK（R13B）並解壓縮至 /Users/cookie/Library/Android
+https://developer.android.com/ndk/downloads/index.html
+P.S.：之前為了配合 Unity3D 所以安裝的是舊版的 NDK R10E 版本
+# --------------------------------------------------
+5、建立 NDK 捷徑
+$ ln -s "$HOME/Library/Android/android-ndk-r13b" "$HOME/Library/Android/ndk"
+$ export ANDROID_NDK_HOME="$HOME/Library/Android/ndk"
+# --------------------------------------------------
+6、安裝 GoMobile with NDK
+$ gomobile init -v --ndk "$ANDROID_NDK_HOME"
+# --------------------------------------------------
+7、編讀 apk 檔，完成後 basic.apk 會出現在 %GOPATH%\src\golang.org\x\mobile\example\basic 底下
+> cd "%GOPATH%\src\golang.org\x\mobile\example\basic"
+> gomobile build --target=android .\
+# --------------------------------------------------
+最後感謝 Evan 大的幫忙：）
+# --------------------------------------------------
+
+
+
+想請教有使用過 GoBot + Raspberry pi 3 B 的大大
+小的按照官網的範例，但串接在 Raspberry pin 7 上的 LED + 電阻就是不會亮（有確認將之接在 VCC 5V 上會發光）
+官網連結：https://gobot.io/documentation/platforms/raspi/
+以下是我的執行流程
+--------------------------------------------------
+1、在 Mac 上安裝 GoBot（經過測試 Raspberry 僅能安裝 Golang 1.4，且安裝 GoBot 會失敗，所以需透過 Mac 等作業系統預先編譯）
+$ go get -d -u -v gobot.io/x/gobot/...
+$ go install gobot.io/x/gobot/platforms/raspi
+--------------------------------------------------
+2、編譯 raspi_blink.go（參數 GOARM 6 與 7 均有試過）
+$ cd $GOPATH/src/gobot.io/x/gobot/examples
+$ GOARM=7 GOARCH=arm GOOS=linux go build raspi_blink.go
+--------------------------------------------------
+3、將編譯後的檔案傳到 Raspberry 內
+$ scp -p raspi_blink pi@192.168.0.48:"/home/pi/work/src/gobot.io/x/gobot/examples/raspi_blink"
+註：若因找不到目的資料夾導致上述指令失敗，需先至 Raspberry 內建立好資料夾
+$ ssh pi@192.168.0.48
+$$ mkdir -p /home/pi/work/src/gobot.io/x/gobot/examples/
+$$ exit
+--------------------------------------------------
+4、進到 Raspberry 內執行編譯好的檔案
+$ ssh pi@192.168.0.48
+$$ "/home/pi/work/src/gobot.io/x/gobot/examples/raspi_blink"
+--------------------------------------------------
+5、雖然會顯示 Starting work... 字眼（如圖），但 Pin 7 上的 LED 就是不會亮，不知道有沒有大大遇過並解決這個問題呢？
+感謝您們 ~
