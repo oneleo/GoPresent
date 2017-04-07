@@ -15,8 +15,9 @@ Installation and Usage
     Browse: http://127.0.0.1:3999/
 
 #### (2) Browse Directly:
-    http://go-talks.appspot.com/github.com/oneleo/GoPresent/GTG22.slide#1
-
+    http://go-talks.appspot.com/github.com/oneleo/GoPresent/GTG22.slide
+    http://go-talks.appspot.com/github.com/oneleo/GoPresent/OnlineBookGo.slide
+    
 Inspired By
 =============
 1. Evan Lin [In Love with Golang](http://go-talks.appspot.com/github.com/kkdai/GolangTalks/gdgfest/gdgfest.slide)
