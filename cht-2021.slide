@@ -1,0 +1,153 @@
+2021 年中華電信學院 Go 語言入門班
+課程簡介
+14:30 28 Dec 2020
+Tags: Go, Golang, Introduction
+
+介紹人：資訊學系 陳敬翔 培訓師
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 爽度 V.S. 效能
+
+- 除了效能外，打扣時爽度也很重要！
+
+.image ./images/go-fast.png 401 600
+
+.link https://talks.golang.org/2014/gocon-tokyo.slide#28 Refference: Go: 90% Perfect, 100% of the time.
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 因為 C 語言的共同發明者 [[https://zh.wikipedia.org/wiki/%E8%82%AF%C2%B7%E6%B1%A4%E6%99%AE%E9%80%8A][Ken Thompson]]  也是 Go 創始人之一
+
+- 所以 G○ 語言可以使用[[https://tour.golang.org/moretypes/1][簡單的指標]]來進行記憶體操作
+
+.image ./images/Ken_Thompson.jpg 333 333
+
+#- 大陸百大企業[[https://www.qiniu.com/][七牛雲存儲]]全面改用 [[http://blog.qiniu.com/archives/113][Go 語言]]：「[[http://blog.csdn.net/turingbooks/article/details/7863317][Go 有望成為互聯網時代的 C 語言。]]」
+#- NPM 開源貢獻值最高 [[https://github.com/tj][TJ Holowaychuk]] 決定從 [[https://www.zhihu.com/question/24373004][Node.JS 轉向 Go]]
+#- [[https://devfest-taipei-3cbee.firebaseapp.com/schedule/day1?sessionId=108][2016-12-03 Google Taipei 開發者嘉年華]]時受 [[http://www.evanlin.com/][Evan Lin 大]]啟蒙
+#.image ./images/letsgo.jpg 283 450
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 關鍵字僅 25 個（如：if、else、for、break、continue 等關鍵字）
+
+- 可以從[[https://golang.org/ref/spec#Keywords][官方網站]]查看 Go 語言詳細規格書
+
+- 註：Python 關鍵字為 35 個、Java 關鍵字為 51 個，可參考[[https://github.com/leighmcculloch/keywords][此頁面]]
+
+.image ./images/gokeywords.png 354 777
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 存檔時自動排版，格式統一，容易閱讀
+
+- 因為自動排版，所以使用的 space 和 tab 鍵最少（只有 tab 鍵）
+
+.image ./images/tab.jpg 400 608
+
+.link https://medium.com/@hoffa/400-000-github-repositories-1-billion-files-14-terabytes-of-code-spaces-or-tabs-7cfe0b5dd7fd#.z07eb1yuf Refference: Medium @Hoffa
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 存檔時自動排版，格式統一，容易閱譯
+
+- 因為自動排版，所以團隊能量可集中在解決問題上 → 而不是看別人程式碼看到火大【[[https://play.golang.org/p/uUANEh970a][觀看線上 Demo]]】
+
+.image ./images/GoFmtDemo.png 514 555
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 程式每列句尾不需使用分號結束
+
+- debug 時就是當局者迷，常常會忘了最基本的結尾
+
+- 但，至少寫 Golang 可以少 de 一種 bug… 就是不用擔心分號忘了寫
+
+.image ./images/gofmt2.png 331 1000
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 註解即文件
+
+- 註解寫得好，製作文件免煩惱，以 fmt 套件為例：[[https://github.com/golang/go/blob/master/src/fmt/doc.go][程式碼寫的註解]]、[[https://godoc.org/fmt][說明文件呈現]]
+
+.image ./images/godoc.png 490 777
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 內建重要的 Testing 工具
+
+- 函數命名只要以 TestXXX、BenchmarkXXX 即可
+
+.image ./images/gotest.png 494 555
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 可以撰寫投影片
+
+- 現在的介紹影片即是用 Go 寫的喔 ~ 可參考[[https://godoc.org/golang.org/x/tools/present/][官網說明文件]]
+
+.image ./images/gopresent.png 457 666
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 可將 C 語言嵌入到 Go 裡頭（cgo）
+
+.play -edit ./codePresent/cgo.go /OMIT START/,/OMIT END/
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 原生 http 網站支援
+
+.play -edit ./codePresent/http.go /OMIT START/,/OMIT END/
+
+# --------------------------------------------------
+
+* 為什麼我們要學習 Go 語言？
+
+- 原生具備並發計算能力
+
+.play -edit ./codePresent/routines.go /OMIT START/,/OMIT END/
+
+# --------------------------------------------------
+
+* Are You Ready to GOlang？
+* 介紹完畢，感謝各位！
+
+# --------------------------------------------------
+
+* 註：本投影片下載位置：
+- 原始碼下載位置：
+- [[https://github.com/oneleo/GoPresent][https://github.com/oneleo/GoPresent]]
+- 直接觀看：
+- [[https://talks.godoc.org/github.com/oneleo/GoPresent/cht-2021.slide][https://talks.godoc.org/github.com/oneleo/GoPresent/cht-2021.slide]]
+- [[https://go-talks.appspot.com/github.com/oneleo/GoPresent/cht-2021.slide][https://go-talks.appspot.com/github.com/oneleo/GoPresent/cht-2021.slide]]
+
+# --------------------------------------------------

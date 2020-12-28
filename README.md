@@ -15,8 +15,9 @@ Installation and Usage
     Browse: http://127.0.0.1:3999/
 
 #### (2) Browse Directly:
-    http://go-talks.appspot.com/github.com/oneleo/GoPresent/GTG22.slide
-    http://go-talks.appspot.com/github.com/oneleo/GoPresent/OnlineBookGo.slide
+- [2021 年中華電信學院 Go 語言入門班](http://go-talks.appspot.com/github.com/oneleo/GoPresent/cht-2021.slide)
+- [第 22 屆 GTG](http://go-talks.appspot.com/github.com/oneleo/GoPresent/GTG22.slide)
+- [Go 語言線上讀書會](http://go-talks.appspot.com/github.com/oneleo/GoPresent/OnlineBookGo.slide)
     
 Inspired By
 =============
